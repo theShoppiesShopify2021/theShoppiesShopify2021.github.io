@@ -92,8 +92,11 @@ class App extends Component {
     if(this.state.searchResults.length > 0){
     var res = this.state.searchResults;
     for(let i = 0; i < res.length; i ++){
-      console.log(res[i].Title, '@@@@@@@@@@@@@@@@@@@@@@@')
-      if(!this.state.nominees.includes(this.state.searchResults[i])){
+      var already = [];
+      for(let i = 0; i < this.state.nominees.length; i++){
+        if( this.state.nominees[i] != null){already.push(this.state.nominees[i][0])}
+      }
+      if(!already.includes(this.state.searchResults[i].Title)){
         searchBoxes.push(
           <div style={{ marginRight: 8, marginLeft: 16, marginRight: 16, marginBottom: 16, marginTop: 16 }}>
             <div onClick={() => this.overlayOn(res[i].Title, res[i].Year, res[i].Poster, 'search')} style={{ cursor: 'pointer', backgroundColor: '#3e3e3e', height: 160, width: 160, borderRadius: 32, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
@@ -138,14 +141,14 @@ class App extends Component {
   }
 
   overlayOff(){
-    this.setState({ currMovie: '', display: 'none', type: 'search' }, () => console.log(this.state.nominees, 'OOOOOOOOOOOOOOOO'))
+    this.setState({ currMovie: '', display: 'none', type: 'search' }, () => this.renderResult())
   }
 
   setNominee(name, year, poster) {
     // if(this.state.nominees[4] === null){
     var newNomniees = [...this.state.nominees];
     newNomniees[this.state.currNom] = [name, year, poster];
-    this.setState({ nominees: newNomniees, currNom: this.state.currNom += 1 }, () => this.overlayOff())
+    this.setState({ nominees: newNomniees, currNom: this.state.currNom += 1, }, () => this.overlayOff())
     // }
     // else{
     //   console.log('FULL')
