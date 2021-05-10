@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2bb25093.chunk.css",
+    "main.js": "/static/js/main.dba98848.chunk.js",
+    "main.js.map": "/static/js/main.dba98848.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e3624ab1.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e3624ab1.js.map",
+    "static/js/2.982cec94.chunk.js": "/static/js/2.982cec94.chunk.js",
+    "static/js/2.982cec94.chunk.js.map": "/static/js/2.982cec94.chunk.js.map",
+    "static/js/3.24d1cef2.chunk.js": "/static/js/3.24d1cef2.chunk.js",
+    "static/js/3.24d1cef2.chunk.js.map": "/static/js/3.24d1cef2.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.2bb25093.chunk.css.map": "/static/css/main.2bb25093.chunk.css.map",
+    "static/js/2.982cec94.chunk.js.LICENSE.txt": "/static/js/2.982cec94.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/TwReg.0f62ac66.otf",
+    "static/media/shopify-bag.8e5ec92d.png": "/static/media/shopify-bag.8e5ec92d.png",
+    "static/media/test_movie.f5a19901.jpg": "/static/media/test_movie.f5a19901.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e3624ab1.js",
+    "static/js/2.982cec94.chunk.js",
+    "static/css/main.2bb25093.chunk.css",
+    "static/js/main.dba98848.chunk.js"
+  ]
+}
