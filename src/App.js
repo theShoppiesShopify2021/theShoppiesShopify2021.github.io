@@ -123,9 +123,9 @@ class App extends Component {
     else{
       nomineeBox =
         <div style={{ display: 'flex', maxHeight: '75%', flex: 1, justifyContent: 'center' }}>
-          <div onClick={() => this.overlayOn(this.state.nominees[nomineeNum], 'nom')} style={{ cursor: 'pointer', backgroundColor: '#3e3e3e', height: 160, width: 160, borderRadius: 32, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
-            <Typography align='center' style={{ fontFamily: 'TwReg', paddingLeft: 8, paddingRight: 8, fontSize: 16, color: 'white', lineHeight: 1.25 }}>{this.state.nominees[nomineeNum]}</Typography>
-            <Typography style={{ fontSize: 12, color: 'white' }}>(2019)</Typography>
+          <div onClick={() => this.overlayOn(this.state.nominees[nomineeNum][0], this.state.nominees[nomineeNum][1], this.state.nominees[nomineeNum][2], 'nom')} style={{ cursor: 'pointer', backgroundColor: '#3e3e3e', height: 160, width: 160, borderRadius: 32, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
+            <Typography align='center' style={{ fontFamily: 'TwReg', paddingLeft: 8, paddingRight: 8, fontSize: 16, color: 'white', lineHeight: 1.25 }}>{this.state.nominees[nomineeNum][0]}</Typography>
+            <Typography style={{ fontSize: 12, color: 'white' }}>({this.state.nominees[nomineeNum][1]})</Typography>
           </div>
         </div>
 
@@ -134,33 +134,39 @@ class App extends Component {
   }
 
   overlayOn(name, year, poster, type){
-    this.setState({ currMovie: name, type: type, display: 'block', currMovieYear: year, currMoviePoster: poster })
+    this.setState({ currMovie: name, currMovieYear: year, currMoviePoster: poster, type: type, display: 'block', })
   }
 
   overlayOff(){
-    this.setState({ currMovie: '', display: 'none', type: 'search' }, () => console.log(this.state.nominees, '""""""""'))
+    this.setState({ currMovie: '', display: 'none', type: 'search' }, () => console.log(this.state.nominees, 'OOOOOOOOOOOOOOOO'))
   }
 
-  setNominee(name) {
-    if(this.state.nominees[4] == null){
+  setNominee(name, year, poster) {
+    // if(this.state.nominees[4] === null){
     var newNomniees = [...this.state.nominees];
-    newNomniees[this.state.currNom] = name;
-    this.setState({ nominees: newNomniees, currNom: this.state.currNom += 1 }, () => this.overlayOff(), () => console.log(this.state.nominees, '""""""""'))
-    }
-    else{
-      console.log('FULL')
-    }
+    newNomniees[this.state.currNom] = [name, year, poster];
+    this.setState({ nominees: newNomniees, currNom: this.state.currNom += 1 }, () => this.overlayOff())
+    // }
+    // else{
+    //   console.log('FULL')
+    // }
+
   }
 
-  delNominee(name) {
+  delNominee(movie) {
+    console.log(movie)
     var newNoms = [];
     for(var i=0; i < this.state.nominees.length; i++){
-      if(this.state.nominees[i] != name){
-        newNoms.push(this.state.nominees[i]);
+      console.log(this.state.nominees[i], 'AHSDKAJSHDKAJSHDK')
+      if(this.state.nominees[i] !== null){
+        console.log('12938012938102938120398123098120931823908')
+        if(this.state.nominees[i][0] != movie[0])
+        {newNoms.push(this.state.nominees[i]);}
       }
     }
     newNoms.push(null);
-    this.setState({ nominees: newNoms, currNom: this.state.currNom - 1 }, () => this.overlayOff())
+    this.setState({ nominees: newNoms, currNom: this.state.currNom - 1 }, () => this.overlayOff());
+    console.log(this.state.nominees, 'PPPPPPPPPPPPPPPPPP')
   }
 
   search(){
@@ -230,11 +236,11 @@ class App extends Component {
                       {
                       this.state.type == 'search' ?
                       <div style={this.state.currNom != 5 ? { cursor: 'pointer', display: 'flex', flexDirection: 'column', backgroundColor: '#1d1d1d', height: 36, justifyContent: 'center', alignItems: 'center', width: 120, borderRadius: 45 } : { display: 'flex', flexDirection: 'column', height: 36, justifyContent: 'center', alignItems: 'center', width: 120, borderRadius: 45 }}>
-                        <Typography onClick={this.state.currNom != 5 ? () => this.setNominee(this.state.currMovie) : () => this.overlayOff()} style={this.state.currNom != 5 ? { fontFamily: 'TwBold', fontSize: 18, color: '#fff',  } : { fontFamily: 'TwBold', fontSize: 16, color: '#939393' }}>{this.state.currNom != 5 ? 'Nominate' : 'Nominations full!'}</Typography>
+                        <Typography onClick={this.state.currNom != 5 ? () => this.setNominee(this.state.currMovie, this.state.currMovieYear, this.state.currMoviePoster) : () => this.overlayOff()} style={this.state.currNom != 5 ? { fontFamily: 'TwBold', fontSize: 18, color: '#fff',  } : { fontFamily: 'TwBold', fontSize: 16, color: '#939393' }}>{this.state.currNom != 5 ? 'Nominate' : 'Nominations full!'}</Typography>
                       </div>
                       :
                       <div style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', backgroundColor: '#fff', height: 36, justifyContent: 'center', alignItems: 'center', width: 180, borderRadius: 45 }}>
-                        <Typography onClick={() => this.delNominee(this.state.currMovie)} style={{ fontFamily: 'TwBold', fontWeight: 400, fontSize: 18, color: '#c70039',  }}>{'Remove nomination'}</Typography>
+                        <Typography onClick={() => this.delNominee([this.state.currMovie, this.state.currMovieYear, this.state.currMoviePoster])} style={{ fontFamily: 'TwBold', fontWeight: 400, fontSize: 18, color: '#c70039',  }}>{'Remove nomination'}</Typography>
                       </div>
                       }
                     </div>
